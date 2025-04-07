@@ -76,9 +76,9 @@ public final class Main extends JavaPlugin implements Listener {
       }
       Path path = Path.of("firework.txt");
       if(sneakCount.toString().contains("3")) {
-        Files.writeString(path, "かーぎやー!");  // 3がつくときだけこっち
+        Files.writeString(path, "かーぎやー!");  // 3がつく回数のときは「かーぎやー！」と表示
       }else{
-        Files.writeString(path, "たーまやー!");
+        Files.writeString(path, "たーまやー!");  // それ以外のときは「たーまやー！」と表示
       }
       // アクションバーにメッセージを表示
       player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Files.readString(path)));
