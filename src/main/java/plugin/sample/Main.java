@@ -43,6 +43,7 @@ public final class Main extends JavaPlugin implements Listener {
 
     List<Type> typeList = List.of(Type.BALL, Type.STAR, Type.BALL_LARGE);
 
+    // スニークした回数が素数のときに実行する。
     if(sneakCount.isProbablePrime(1)) {
       int delay = 0; // 遅延時間を管理する変数
 
@@ -70,17 +71,19 @@ public final class Main extends JavaPlugin implements Listener {
             // 追加した情報で再設定する。
             firework.setFireworkMeta(fireworkMeta);
           }
-        }.runTaskLater(this, delay); // delay秒後に実行
-        delay += 10; // 0.5秒遅延を追加（20ティック＝1秒）
+        }.runTaskLater(this, delay);  // delay秒後に実行
+        delay += 10;  // 0.5秒遅延を追加（20ティック＝1秒）
       }
       Path path = Path.of("firework.txt");
       if(sneakCount.toString().contains("3")) {
-        Files.writeString(path, "かーぎやー!");
+        Files.writeString(path, "かーぎやー!");  // 3がつくときだけこっち
       }else{
         Files.writeString(path, "たーまやー!");
       }
+      // アクションバーにメッセージを表示
       player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Files.readString(path)));
       player.sendMessage(sneakCount + "は素数なので花火が飛びました");
+      // 何回後に花火が飛ぶか表示
       player.sendMessage("次に花火が飛ぶのは"+ sneakCount.nextProbablePrime().subtract(sneakCount)+"回後です");
     }
     sneakCount = sneakCount.add(BigInteger.ONE);
